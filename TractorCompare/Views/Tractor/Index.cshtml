@@ -1,0 +1,48 @@
+﻿
+@using TractorCompare.Models;
+@model IEnumerable<Tractors>
+
+
+
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-2">
+            <br />
+            <br />
+            <br />
+            <h4>Brands</h4>
+        </div>
+
+        <div class="col-10">
+            <h2>Tractors</h2>
+            <table class="table table-hover" id="TractorTable" aria-disabled="false">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Brand</th>
+                        <th>Model</th>
+                        <th>Engine HP</th>
+                    </tr>
+                </thead>
+
+                @foreach (var Tractor in Model)
+                {
+                    <tbody>
+                        <tr>
+                            <td>
+                                <a href=/Tractors/viewTractor/@Tractor.tractorID>
+                                    <img src="@Url.Content(@Tractor.image)" alt="tractor" width="150" />
+                                </a>
+                            </td>
+                            <td data-search="John Deere">@Tractor.Brand</td>
+                            <td>@Tractor.Model</td>
+                            <td>@Tractor.HP HP</td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+        </div>
+    </div>
+</div>
