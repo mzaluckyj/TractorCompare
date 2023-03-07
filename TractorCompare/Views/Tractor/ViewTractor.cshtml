@@ -1,0 +1,52 @@
+﻿<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/bootstrap.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/TractorCompare.styles.css" asp-append-version="true" />
+</head>
+
+@using TractorCompare.Models;
+@model Tractors
+
+<h3>@Model.Model Information</h3>
+
+
+<table class="table">
+    <tr>
+        <th>image</th>
+        <th>Brand</th>
+        <th>Model</th>
+        <th>Engine HP</th>
+        <th>PTO HP</th>
+        <th>Fuel Tank</th>
+        <th>Hydrualic Steering</th>
+        <th>Hydrualic Implement</th>
+        <th>Three Point hitch lift Capacity</th>
+        <!--<th>LoaderID</th>-->
+    </tr>
+    <tr>
+
+        <td><img src="@Url.Content(@Model.image)" alt="tractor" width="150" /></td>
+        <td>@Model.Brand</td>
+        <td>@Model.Model</td>
+        <td>@Model.HP HP</td>
+        <td>@Model.PTO HP</td>
+        <td>@Model.fuel gallons</td>
+        <td>@Model.hydroSteer gpm</td>
+        <td>@Model.hydroImp gpm</td>
+        <td>@Model.threePT Lbs</td>
+        <!--<td>@Model.loaderID</td>-->
+    </tr>
+</table>
+
+<br/>
+<br/>
+<div class="container p-5 my-5" bg-dark text-white>
+    <img src="@Url.Content(@Model.image)" alt="tractor" width="250" />
+    <h1>@Model.Brand</h1>
+    <h3>@Model.Model</h3>
+    <p>HorsePower: @Model.HP</p>
+
+</div>
+

@@ -19,5 +19,20 @@ namespace TractorCompare.Controllers
             var tractors = repo.GetAllTractors();
             return View(tractors);
         }
+
+        public IActionResult ViewTractor(int id)
+        {
+            var tractor = repo.GetTractor(id);
+
+            return View(tractor);
+
+        }
+
+        public IActionResult JohnDeere() 
+        {
+            var johndeere = repo.GetJD();
+
+            return View(johndeere);
+        }
     }
 }

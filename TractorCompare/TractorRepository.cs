@@ -18,5 +18,15 @@ namespace TractorCompare
         {
             return _conn.Query<Tractors>("Select * From Tractors;");
         }
+
+        public Tractors GetTractor(int id)
+        {
+            return _conn.QuerySingle<Tractors>("Select * From Tractors Where tractorID = @id", new { id = id });
+        }
+
+        public IEnumerable<Tractors> GetJD()
+        {
+            return _conn.Query<Tractors>("Select * From Tractors Where Brand = 'John Deere';") ;
+        }
     }
 }
