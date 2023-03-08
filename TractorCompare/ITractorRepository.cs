@@ -12,7 +12,7 @@ namespace TractorCompare
 
 
         public IEnumerable<Tractors> GetJD();
-
+        public IEnumerable<Tractors> GetKubota();
 
     }
 }

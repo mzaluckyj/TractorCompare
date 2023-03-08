@@ -13,20 +13,31 @@
 <div class="container-fluid">
     <div class="row">
 
-        <div class="dropdown col-2" >
+        <div class="dropdown col-2">
             <button type="button" class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown">
                 Brands
             </button>
             <ul class="dropdown-menu">
-                <li><a class="dropdown-item" asp-area="" asp-controller="Tractor" asp-action="JohnDeere">John Deere</a></li>
-                <li><a class="dropdown-item" asp-area="" asp-controller="Tractor" asp-action="JohnDeere">Kubota</a></li>
-                <li><a class="dropdown-item" asp-area="" asp-controller="Tractor" asp-action="JohnDeere">Kioti</a></li>
+                <li><a class="dropdown-item" asp-action="Index" method="get" name ="brands" value="all">Show All</a></li>
+                <li><a class="dropdown-item" asp-action="Index" method="get" name="brands" value="jd">John Deere</a></li>
+                <li><a class="dropdown-item" asp-action="Index" method="get" name="brands" value="kubota">Kubota</a></li>
             </ul>
         </div>
 
+
         <div class="col-10">
             <h2>Tractors</h2>
-            <table class="table table-hover" id="TractorTable" >
+            <form asp-action="Index" method="get">
+                <div class="form-actions no-color">
+                    <p>
+                        Find by Brand: <input type="text" name="SearchString" value="@ViewData["CurrentFilter"]" />
+                        <input type="submit" value="Search" class="btn btn-default" /> |
+                        <a asp-action="Index">Back to Full List</a>
+                    </p>
+                </div>
+            </form>
+
+            <table class="table table-hover" id="TractorTable">
                 <thead>
                     <tr>
                         <th>Image</th>

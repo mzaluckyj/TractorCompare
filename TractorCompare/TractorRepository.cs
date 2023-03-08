@@ -34,5 +34,10 @@ namespace TractorCompare
         {
             return _conn.Query<Tractors>("Select * From Tractors Where Brand = 'John Deere';") ;
         }
+
+        public IEnumerable<Tractors> GetKubota()
+        {
+            return _conn.Query<Tractors>("Select * From Tractors Where Brand = 'Kubota';");
+        }
     }
 }
