@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using TractorCompare.Models;
 
 namespace TractorCompare.Controllers
 {
@@ -26,6 +27,23 @@ namespace TractorCompare.Controllers
 
             return View(tractor);
 
+        }
+
+        public IActionResult UpdateTractor(int id)
+        {
+            Tractors make = repo.GetTractor(id);
+            if (make == null)
+            {
+                return View("ProductNotFound");
+            }
+            return View(make);
+        }
+
+        public IActionResult UpdateTractorToDatabase(Tractors tractor)
+        {
+            repo.UpdateTractor(tractor);
+
+            return RedirectToAction("ViewTractor", new {id = tractor.tractorID});
         }
 
         public IActionResult JohnDeere() 

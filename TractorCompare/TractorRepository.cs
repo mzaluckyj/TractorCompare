@@ -21,9 +21,15 @@ namespace TractorCompare
 
         public Tractors GetTractor(int id)
         {
-            return _conn.QuerySingle<Tractors>("Select * From Tractors Where tractorID = @id", new { id = id });
+            return _conn.QuerySingle<Tractors>("Select * From Tractors Where tractorID = @id",
+                new { id = id });
         }
 
+        public void UpdateTractor(Tractors tractor) 
+        {
+            _conn.Execute("Update Tractors SET Brand = @Brand, Model = @Model, Class = @Class, HP = @HP Where tractorID = @id;",
+                new {Brand = tractor.Brand, Model = tractor.Model, Class = tractor.Class, HP = tractor.HP, id = tractor.tractorID});
+        }
         public IEnumerable<Tractors> GetJD()
         {
             return _conn.Query<Tractors>("Select * From Tractors Where Brand = 'John Deere';") ;

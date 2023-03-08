@@ -1,6 +1,12 @@
+
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using MySql.Data.MySqlClient;
 using System.Data;
 using TractorCompare;
+
 
 var builder = WebApplication.CreateBuilder(args);
 

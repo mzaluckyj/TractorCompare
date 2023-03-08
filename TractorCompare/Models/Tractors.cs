@@ -6,7 +6,7 @@
         {
         }
 
-        public string tractorID { get; set; }
+        public int tractorID { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
         public string Class { get; set; }
