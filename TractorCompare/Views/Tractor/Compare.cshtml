@@ -1,0 +1,64 @@
+﻿<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/bootstrap.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/TractorCompare.styles.css" asp-append-version="true" />
+</head>
+
+@using TractorCompare.Models;
+@model IEnumerable<Tractors>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2">
+            nav bar
+        </div>
+        <div class="col-5">
+            pick tractor 1
+            <form asp-action="Compare" method="get">
+                <div class="form-actions no-color">
+                    <p>
+                        tractor1: <input type="text" name="model1" value="@ViewData["model1"]" />
+                        <input type="submit" value="Search" class="btn btn-default" /> |
+                        <a asp-action="Index">Back to Full List</a>
+                    </p>
+                    <p>
+                        @foreach (var tractor in Model)
+                        {
+                            <img src="@Url.Content(@tractor.image)" alt="tractor" width="250" />
+                            <h1>@tractor.brandID</h1>
+                            <h3>@tractor.Model</h3>
+                        <p>HorsePower: @tractor.HP</p>
+
+                    }
+                    </p>
+
+                    </div>
+            </form>
+        </div>
+        <div class="col-5">
+            pick tractor2
+            <form asp-action="Compare" method="get">
+                <div class="form-actions no-color">
+                    <p>
+                        tractor2: <input type="text" name="model1" default="1025r" value="@ViewData["model2"]" />
+                        <input type="submit" value="Search" class="btn btn-default" /> |
+                        <a asp-action="Index">Back to Full List</a>
+                    </p>
+
+                    <p>
+                        @foreach (var tractor in Model)
+                        {
+                            <img src="@Url.Content(@tractor.image)" alt="tractor" width="250" />
+                            <h1>@tractor.brandID</h1>
+                            <h3>@tractor.Model</h3>
+                            <p>HorsePower: @tractor.HP</p>
+
+                    }
+                        </p>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>

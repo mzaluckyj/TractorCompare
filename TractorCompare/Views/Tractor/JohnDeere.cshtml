@@ -10,44 +10,60 @@
 @model IEnumerable<Tractors>
 
 
-<div class="col-10">
-    <h2>John Deere Tractors</h2>
-    <table class="table table-hover" id="JohnDeere" aria-disabled="false">
-        <thead>
-            <tr>
-                <th>Image</th>
-                <th>Brand</th>
-                <th>Model</th>
-                <th>Class</th>
-                <th>Engine Horsepower</th>
-                <th>PTO Horsepower</th>
-                <th>Fuel tank Capacity</th>
-                <th>Hydraulic steering flow gpm</th>
-                <th>Hydraulic implement flow gpm</th>
-                <th>Three point hitch lift capacity</th>
-            </tr>
-        </thead>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-2">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        Sort By Brands
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" asp-controller="Tractor" asp-action="Index">All Brands</a></li>
+                        <li><a class="dropdown-item" asp-controller="Tractor" asp-action="JohnDeere">John Deere</a></li>
+                        <li><a class="dropdown-item" asp-controller="Tractor" asp-action="Kubota">Kubota</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-10">
+                <h2>John Deere Tractors</h2>
+                <table class="table table-hover" data-bs-spy="scroll" id="JohnDeere" aria-disabled="false">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Brand</th>
+                            <th>Model</th>
+                            <th>Class</th>
+                            <th>Engine Horsepower</th>
+                            <th>PTO Horsepower</th>
+                            <th>Fuel tank Capacity</th>
+                            <th>Hydraulic steering flow gpm</th>
+                            <th>Hydraulic implement flow gpm</th>
+                            <th>Three point hitch lift capacity</th>
+                        </tr>
+                    </thead>
 
-        @foreach (var Tractor in Model)
-        {
-            <tbody>
-                <tr>
-                    <td>
-                        <a href=/Tractor/viewTractor/@Tractor.tractorID>
-                            <img src="@Url.Content(@Tractor.image)" alt="tractor" width="150" />
-                        </a>
-                    </td>
-                    <td data-search="John Deere">@Tractor.Brand</td>
-                    <td>@Tractor.Model</td>
-                    <td>@Tractor.Class</td>
-                    <td>@Tractor.HP HP</td>
-                    <td>@Tractor.PTO HP </td>
-                    <td>@Tractor.fuel Gallons</td>
-                    <td>@Tractor.hydroSteer gpm</td>
-                    <td>@Tractor.hydroImp gpm</td>
-                    <td>@Tractor.threePT lbs</td>
-                </tr>
-            </tbody>
-        }
-    </table>
-</div>
+                    @foreach (var Tractor in Model)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <a href=/Tractor/viewTractor/@Tractor.tractorID>
+                                        <img src="@Url.Content(@Tractor.image)" alt="tractor" width="150" />
+                                    </a>
+                                </td>
+                                <td data-search="John Deere">@Tractor.brandID</td>
+                                <td>@Tractor.Model</td>
+                                <td>@Tractor.Class</td>
+                                <td>@Tractor.HP HP</td>
+                                <td>@Tractor.PTO HP </td>
+                                <td>@Tractor.fuel Gallons</td>
+                                <td>@Tractor.hydroSteer gpm</td>
+                                <td>@Tractor.hydroImp gpm</td>
+                                <td>@Tractor.threePT lbs</td>
+                            </tr>
+                        </tbody>
+                    }
+                </table>
+            </div>
+        </div>
+     </div>

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using TractorCompare.Models;
 
 namespace TractorCompare.Controllers
@@ -17,34 +18,29 @@ namespace TractorCompare.Controllers
             this.repo = repo;
         }
 
-        public async Task<IActionResult> Index(string searchString, string brandFilter)
+        public IActionResult Index(string searchString, string brands)
         {
-            var tractors = from t in repo.GetAllTractors() select t;
 
-            ViewData["CurrentFilter"] = searchString;
-            ViewData["Brands"] = brandFilter;
+            var tractors = repo.GetAllTractors();
+            ViewData["%CurrentFilter%"] = searchString;
+            ViewData["brands"] = brands;
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                tractors = tractors.Where(t => t.Brand.Contains(searchString));
-            }
-            if (brandFilter != null)
-            {
-                switch (brandFilter)
-                {
-                    default:
-                        tractors = from t in repo.GetAllTractors() select t;
-                        break;
-                    case "jd":
-                        tractors = tractors.Where(t => t.Brand.Contains("John Deere"));
-                        break;
-                    case "kubota":
-                        tractors = tractors.Where(t => t.Brand.Contains("Kubota"));
-                        break;
-                }
+                tractors = tractors.Where(t => t.brandID.Contains(searchString));
             }
 
+
+           
+            if (!String.IsNullOrEmpty(brands))
+            {
+                tractors = tractors.Where(t => t.brandID.Equals(brands));
+            }
+
+
+
             return View(tractors);
+            
 
         }
        // public IActionResult Index()
@@ -52,6 +48,28 @@ namespace TractorCompare.Controllers
        //  var tractors = repo.GetAllTractors();
        //   return View(tractors);
        // }
+
+        public IActionResult Compare(string model1, string model2)
+        {
+            ViewData["Model1"] = model1;
+            ViewData["Model2"] = model2;
+
+            var tractors = from t in repo.CompareNow() select t;
+            
+
+            if (!String.IsNullOrEmpty(model1))
+            {
+                tractors = tractors.Where(t => t.Model.Contains(model1));
+            }
+
+            if (!String.IsNullOrEmpty(model2))
+            {
+                tractors = tractors.Where(x => x.Model.Contains(model2));
+                
+            }
+
+            return View(tractors);
+        }
 
         public IActionResult ViewTractor(int id)
         {
@@ -80,9 +98,9 @@ namespace TractorCompare.Controllers
 
         public IActionResult JohnDeere() 
         {
-            var johndeere = repo.GetJD();
+           var jd = repo.GetJD();
 
-            return View(johndeere);
+            return View(jd);
         }
 
         public IActionResult Kubota()
@@ -91,5 +109,24 @@ namespace TractorCompare.Controllers
 
             return View(kubota);
         }
+
+        public IActionResult InsertTractor()
+        {
+            var trac = repo.AssignBrand();
+            return View(trac);
+        }
+
+        public IActionResult InsertTractorToDB(Tractors newtractor) 
+        {
+            repo.InsertTractor(newtractor);
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult DeleteTractor(Tractors tractors) 
+        {
+            repo.DeleteTractor(tractors);
+            return RedirectToAction("Index");
+        }
+
     }
 }

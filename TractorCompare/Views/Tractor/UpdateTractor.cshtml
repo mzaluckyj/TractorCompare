@@ -1,14 +1,14 @@
 ﻿@using TractorCompare.Models;
 @model Tractors
 
-<h2>Update @Model.Brand @Model.Model</h2>
+<h2>Update @Model.brandID @Model.Model</h2>
 
 @using (Html.BeginForm("UpdateTractorToDatabase", "Tractor", "Post"))
 {
     <input asp-for="tractorID" type="hidden" value="@Model.tractorID" />
 
-    <label asp-for="Brand" class="control-label">Brand</label>
-    <input title="Brand" type="text" name="Brand" class="form-control" value="@Model.Brand" />
+    <label asp-for="brandID" class="control-label">Brand</label>
+    <input title="Brand" type="text" name="Brand" class="form-control" value="@Model.brandID" />
 
     <label asp-for="Model" class="control-label">Model</label>
     <input title="Model" type="text" name="Model" class="form-control" value="@Model.Model" />

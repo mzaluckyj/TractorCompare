@@ -6,72 +6,40 @@
     <link rel="stylesheet" href="~/TractorCompare.styles.css" asp-append-version="true" />
 </head>
 
-
 @using TractorCompare.Models;
 @model IEnumerable<Tractors>
 
+
 <div class="container-fluid">
     <div class="row">
-
         <div class="col-2">
             <div class="dropdown">
-                <h2>Sort by</h2>
                 <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    Brands
+                    Sort By Brands
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li><a class="dropdown-item" asp-controller="Tractor" asp-action="Index">All Brands</a></li>
                     <li><a class="dropdown-item" asp-controller="Tractor" asp-action="JohnDeere">John Deere</a></li>
                     <li><a class="dropdown-item" asp-controller="Tractor" asp-action="Kubota">Kubota</a></li>
-                    <li><a class="dropdown-item" asp-controller="Tractor" asp-action="Kioti">Kioti</a></li>
                 </ul>
             </div>
-            <br />
-            <br />
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    Size
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" asp-controller="Tractor" asp-action="Index">All Brands</a></li>
-                    <li><a class="dropdown-item" asp-controller="Tractor" asp-action="JohnDeere">John Deere</a></li>
-                    <li><a class="dropdown-item" asp-controller="Tractor" asp-action="Kubota">Kubota</a></li>
-                    <li><a class="dropdown-item" asp-controller="Tractor" asp-action="Kubota">Kubota</a></li>
-                </ul>
-            </div>
-            <br />
-
-
         </div>
-
-
-        
-
-
         <div class="col-10">
-            <h2>Tractors</h2>
-            <form asp-action="Index" method="get">
-                <div class="form-actions no-color">
-                    <p>
-                        Find by Brand: <input type="text" name="SearchString" value="@ViewData["%CurrentFilter%"]" />
-                        <input type="submit" value="Search" class="btn btn-default" /> |
-                        <a asp-action="Index">Back to Full List</a>
-                    </p>
-                </div>
-            </form>
-            <div style="display: block">
-                <a href="/Tractor/InsertTractor/">Add a new Tractor</a>
-            </div>
-
-            <table class="table table-hover" data-bs-spy="scroll" id="TractorTable">
+            <h2>Kubota Tractors</h2>
+            <table class="table table-hover" id="Kubota" aria-disabled="false">
                 <thead>
                     <tr>
                         <th>Image</th>
                         <th>Brand</th>
                         <th>Model</th>
-                        <th>Engine HP</th>
+                        <th>Class</th>
+                        <th>Engine Horsepower</th>
+                        <th>PTO Horsepower</th>
+                        <th>Fuel tank Capacity</th>
+                        <th>Hydraulic steering flow gpm</th>
+                        <th>Hydraulic implement flow gpm</th>
+                        <th>Three point hitch lift capacity</th>
                     </tr>
-
                 </thead>
 
                 @foreach (var Tractor in Model)
@@ -83,13 +51,19 @@
                                     <img src="@Url.Content(@Tractor.image)" alt="tractor" width="150" />
                                 </a>
                             </td>
-                            <td>@Tractor.brandID</td>
+                            <td data-search="Kubota">@Tractor.brandID</td>
                             <td>@Tractor.Model</td>
+                            <td>@Tractor.Class</td>
                             <td>@Tractor.HP HP</td>
+                            <td>@Tractor.PTO HP </td>
+                            <td>@Tractor.fuel Gallons</td>
+                            <td>@Tractor.hydroSteer gpm</td>
+                            <td>@Tractor.hydroImp gpm</td>
+                            <td>@Tractor.threePT lbs</td>
                         </tr>
                     </tbody>
                 }
             </table>
         </div>
-        </div>
+    </div>
 </div>

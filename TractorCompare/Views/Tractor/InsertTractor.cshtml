@@ -1,0 +1,27 @@
+﻿@model Tractors
+
+
+<h2>Add a new Tractor</h2>
+
+@using (Html.BeginForm("InsertTractorToDB", "Tractor", "Post"))
+{
+    <input asp-for="tractorID" type="hidden" value="" />
+
+    <label asp-for="Model" class="control-label">Model</label>
+    <input type="text" name="Model" class="form-control" value="" />
+
+    <label asp-for="HP" class="control-label">Horse Power</label>
+    <input type="number" step="0.01" name="HP" class="form-control" />
+
+    <div class="form-group">
+        <label for="">Select a Brand</label>
+        <select class="form-control" name="brandID" value="">
+            @foreach (var x in Model.name)
+            {
+                <option value="@x.brandID"> @x.name</option>
+            }
+        </select>
+    </div>
+
+    <input type="submit" value="Add Tractor" class="btn btn-primary" />
+}

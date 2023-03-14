@@ -1,4 +1,7 @@
-﻿namespace TractorCompare.Models
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
+
+namespace TractorCompare.Models
 {
     public class Tractors
     {
@@ -7,7 +10,7 @@
         }
 
         public int tractorID { get; set; }
-        public string Brand { get; set; }
+        public string brandID { get; set; }
         public string Model { get; set; }
         public string Class { get; set; }
         public string HP { get; set; }
@@ -19,6 +22,9 @@
         public string loaderID { get; set; }
 
         public string image { get; set; }
+
+
+        public IEnumerable<Brand> name { get; set; }
 
     }
 }

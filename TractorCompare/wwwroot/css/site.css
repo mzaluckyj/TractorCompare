@@ -16,3 +16,7 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+table.table-fixedheader > thead {
+    overflow-y: scroll;
+}
