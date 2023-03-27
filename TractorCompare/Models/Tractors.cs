@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Org.BouncyCastle.Bcpg.OpenPgp;
 using System.Collections.Generic;
+using System.ComponentModel;
+
 
 namespace TractorCompare.Models
 {
@@ -10,7 +13,8 @@ namespace TractorCompare.Models
         }
 
         public int tractorID { get; set; }
-        public string brandID { get; set; }
+        public int brandID { get; set; }
+        public string brand { get; set; }
         public string Model { get; set; }
         public string Class { get; set; }
         public string HP { get; set; }
@@ -22,9 +26,9 @@ namespace TractorCompare.Models
         public string loaderID { get; set; }
 
         public string image { get; set; }
-
-
         public IEnumerable<Brand> name { get; set; }
+
+
 
     }
 }

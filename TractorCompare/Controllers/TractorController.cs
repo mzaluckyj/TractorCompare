@@ -18,55 +18,79 @@ namespace TractorCompare.Controllers
             this.repo = repo;
         }
 
-        public IActionResult Index(string searchString, string brands)
+        public IActionResult Index(string searchString, string filter)
         {
 
             var tractors = repo.GetAllTractors();
+
+
             ViewData["%CurrentFilter%"] = searchString;
-            ViewData["brands"] = brands;
+            ViewBag.BrandSort = String.IsNullOrEmpty(filter) ? "brand_desc" : "";
+            ViewBag.HPSort = String.IsNullOrEmpty(filter) ? "hp_desc" : "";
+            ViewBag.ClassSort = String.IsNullOrEmpty(filter) ? "class_desc" : "";
+            ViewBag.All = "All";
+            ViewBag.JD = "John Deere";
+            ViewBag.Kub = "Kubota";
+            ViewBag.Kiot = "Kioti";
+            ViewBag.Sub = "Sub";
+            ViewBag.SF = "SF";
+            ViewBag.SC = "SC";
+            ViewBag.Com = "Com";
+
+
+            switch (filter)
+            {
+                case "brand_desc":
+                    tractors = tractors.OrderBy(t => t.brand);
+                    break;
+                case "class_desc":
+                    tractors = tractors.OrderBy(t => t.Class);
+                    break;
+                case "hp_desc":
+                    tractors = tractors.OrderBy(t => t.HP);
+                    break;
+                case "John Deere":
+                    tractors = tractors.Where(t => t.brand.Equals("John Deere"));
+                    break;
+                case "Kubota":
+                    tractors = tractors.Where(t => t.brand.Equals("Kubota"));
+                    break;
+                case "Kioti":
+                    tractors = tractors.Where(t => t.brand.Equals("Kioti"));
+                    break;
+                case "Sub":
+                    tractors = tractors.Where(t => t.Class.Equals("1. Sub-Compact"));
+                    break;
+                case "SF":
+                    tractors = tractors.Where(t => t.Class.Equals("2. Small Frame"));
+                    break;
+                case "SC":
+                    tractors = tractors.Where(t => t.Class.Equals("2. Small Compact"));
+                    break;
+                case "Com":
+                    tractors = tractors.Where(t => t.Class.Equals("3. Compact"));
+                    break;
+                default:
+                    tractors = tractors.OrderBy(t => t.brand);
+                    break;
+            }
+
+
+
 
             if (!String.IsNullOrEmpty(searchString))
             {
-                tractors = tractors.Where(t => t.brandID.Contains(searchString));
+                tractors = tractors.Where(t => t.Model.Contains(searchString));
             }
-
-
-           
-            if (!String.IsNullOrEmpty(brands))
-            {
-                tractors = tractors.Where(t => t.brandID.Equals(brands));
-            }
-
-
 
             return View(tractors);
-            
-
         }
-       // public IActionResult Index()
-       // {
-       //  var tractors = repo.GetAllTractors();
-       //   return View(tractors);
-       // }
+
 
         public IActionResult Compare(string model1, string model2)
         {
-            ViewData["Model1"] = model1;
-            ViewData["Model2"] = model2;
-
             var tractors = from t in repo.CompareNow() select t;
             
-
-            if (!String.IsNullOrEmpty(model1))
-            {
-                tractors = tractors.Where(t => t.Model.Contains(model1));
-            }
-
-            if (!String.IsNullOrEmpty(model2))
-            {
-                tractors = tractors.Where(x => x.Model.Contains(model2));
-                
-            }
 
             return View(tractors);
         }
@@ -92,29 +116,14 @@ namespace TractorCompare.Controllers
         public IActionResult UpdateTractorToDatabase(Tractors tractor)
         {
             repo.UpdateTractor(tractor);
-
             return RedirectToAction("ViewTractor", new {id = tractor.tractorID});
         }
-
-        public IActionResult JohnDeere() 
-        {
-           var jd = repo.GetJD();
-
-            return View(jd);
-        }
-
-        public IActionResult Kubota()
-        {
-            var kubota = repo.GetKubota();
-
-            return View(kubota);
-        }
-
         public IActionResult InsertTractor()
         {
             var trac = repo.AssignBrand();
             return View(trac);
         }
+
 
         public IActionResult InsertTractorToDB(Tractors newtractor) 
         {
@@ -128,5 +137,19 @@ namespace TractorCompare.Controllers
             return RedirectToAction("Index");
         }
 
+
+        public IActionResult JohnDeere()
+        {
+            var jd = repo.GetJD();
+
+            return View(jd);
+        }
+
+        public IActionResult Kubota()
+        {
+            var kubota = repo.GetKubota();
+
+            return View(kubota);
+        }
     }
 }

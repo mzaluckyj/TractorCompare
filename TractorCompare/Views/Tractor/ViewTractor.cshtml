@@ -28,7 +28,7 @@
     <tr>
 
         <td><img src="@Url.Content(@Model.image)" alt="tractor" width="150" /></td>
-        <td>@Model.brandID</td>
+        <td>@Model.brand</td>
         <td>@Model.Model</td>
         <td>@Model.HP HP</td>
         <td>@Model.PTO HP</td>
@@ -48,8 +48,8 @@
 <br/>
 <br/>
 <div class="container p-5 my-5" bg-dark text-white>
-    <img src="@Url.Content(@Model.image)" alt="tractor" width="250" />
-    <h1>@Model.brandID</h1>
+    <img src="@Url.Content(@Model.image)" alt="tractor" />
+    <h1>@Model.brand</h1>
     <h3>@Model.Model</h3>
     <p>HorsePower: @Model.HP</p>
 

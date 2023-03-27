@@ -29,8 +29,8 @@ namespace TractorCompare
 
         public void UpdateTractor(Tractors tractor) 
         {
-            _conn.Execute("Update Tractors SET Brand = @brandID, Model = @Model, Class = @Class, HP = @HP Where tractorID = @id;",
-                new {Brand = tractor.brandID, Model = tractor.Model, Class = tractor.Class, HP = tractor.HP, id = tractor.tractorID});
+            _conn.Execute("Update Tractors SET Brand = @brand, Model = @Model, Class = @Class, HP = @HP Where tractorID = @id;",
+                new {Brand = tractor.brand, Model = tractor.Model, Class = tractor.Class, HP = tractor.HP, id = tractor.tractorID});
         }
         public IEnumerable<Tractors> GetJD()
         {

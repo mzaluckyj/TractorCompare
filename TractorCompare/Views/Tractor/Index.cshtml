@@ -14,34 +14,33 @@
     <div class="row">
 
         <div class="col-2">
+            <h2>Sort by</h2>
+            <div>
+                <button class="btn-success" asp-action="Index">Show All</button>
+            </div>
+            <br />
             <div class="dropdown">
-                <h2>Sort by</h2>
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     Brands
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" asp-controller="Tractor" asp-action="Index">All Brands</a></li>
-                    <li><a class="dropdown-item" asp-controller="Tractor" asp-action="JohnDeere">John Deere</a></li>
-                    <li><a class="dropdown-item" asp-controller="Tractor" asp-action="Kubota">Kubota</a></li>
-                    <li><a class="dropdown-item" asp-controller="Tractor" asp-action="Kioti">Kioti</a></li>
+                    <li>@Html.ActionLink("John Deere", "Index", new { filter = ViewBag.JD })</li>
+                    <li>@Html.ActionLink("Kubota", "Index", new { filter = ViewBag.Kub })</li>
+                    <li>@Html.ActionLink("Kioti", "Index", new { filter = ViewBag.Kiot })</li>
                 </ul>
             </div>
             <br />
-            <br />
             <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                     Size
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><a class="dropdown-item" asp-controller="Tractor" asp-action="Index">All Brands</a></li>
-                    <li><a class="dropdown-item" asp-controller="Tractor" asp-action="JohnDeere">John Deere</a></li>
-                    <li><a class="dropdown-item" asp-controller="Tractor" asp-action="Kubota">Kubota</a></li>
-                    <li><a class="dropdown-item" asp-controller="Tractor" asp-action="Kubota">Kubota</a></li>
+                    <li>@Html.ActionLink("Sub-Compact", "Index", new { filter = ViewBag.Sub})</li>
+                    <li>@Html.ActionLink("Small Frame", "Index", new { filter = ViewBag.SF })</li>
+                    <li>@Html.ActionLink("Small Compact", "Index", new { filter = ViewBag.SC })</li>
+                    <li>@Html.ActionLink("Compact", "Index", new { filter = ViewBag.Com })</li>
                 </ul>
             </div>
-            <br />
-
-
         </div>
 
 
@@ -67,9 +66,16 @@
                 <thead>
                     <tr>
                         <th>Image</th>
-                        <th>Brand</th>
+                        <!--<th>Html.ActionLink("Brand", "Index", new {class="bi bi-arrow-down-up", sortOrder = ViewBag.BrandSort})</th>-->
+                        <th>Brand </th>
                         <th>Model</th>
-                        <th>Engine HP</th>
+                        <th>Series/Size</th>
+                        <th>Horse Power</th>
+                        <th>PTO HP</th>
+                        <th>Fuel cap.</th>
+                        <th>Hydrualic steering</th>
+                        <th>Hydrualic implement</th>
+                        <th>3pt hitch lift cap.</th>
                     </tr>
 
                 </thead>
@@ -83,9 +89,15 @@
                                     <img src="@Url.Content(@Tractor.image)" alt="tractor" width="150" />
                                 </a>
                             </td>
-                            <td>@Tractor.brandID</td>
+                            <td>@Tractor.brand</td>
                             <td>@Tractor.Model</td>
+                            <td>@Tractor.Class</td>
                             <td>@Tractor.HP HP</td>
+                            <td>@Tractor.PTO HP</td>
+                            <td>@Tractor.fuel Gal</td>
+                            <td>@Tractor.hydroSteer Gpm</td>
+                            <td>@Tractor.hydroImp Gpm</td>
+                            <td>@Tractor.threePT Lbs</td>
                         </tr>
                     </tbody>
                 }
@@ -93,3 +105,5 @@
         </div>
         </div>
 </div>
+
+

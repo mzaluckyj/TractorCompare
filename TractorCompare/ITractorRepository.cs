@@ -23,5 +23,8 @@ namespace TractorCompare
         public Tractors AssignBrand();
 
         public void DeleteTractor(Tractors tractor);
+
+
+
     }
 }
