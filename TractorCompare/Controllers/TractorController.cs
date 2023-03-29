@@ -18,13 +18,11 @@ namespace TractorCompare.Controllers
             this.repo = repo;
         }
 
-        public IActionResult Index(string searchString, string filter)
+        public IActionResult Index(string filter)
         {
 
             var tractors = repo.GetAllTractors();
 
-
-            ViewData["%CurrentFilter%"] = searchString;
             ViewBag.BrandSort = String.IsNullOrEmpty(filter) ? "brand_desc" : "";
             ViewBag.HPSort = String.IsNullOrEmpty(filter) ? "hp_desc" : "";
             ViewBag.ClassSort = String.IsNullOrEmpty(filter) ? "class_desc" : "";
@@ -41,7 +39,7 @@ namespace TractorCompare.Controllers
             switch (filter)
             {
                 case "brand_desc":
-                    tractors = tractors.OrderBy(t => t.brand);
+                    tractors = tractors.OrderBy(t => t.brandID);
                     break;
                 case "class_desc":
                     tractors = tractors.OrderBy(t => t.Class);
@@ -50,13 +48,13 @@ namespace TractorCompare.Controllers
                     tractors = tractors.OrderBy(t => t.HP);
                     break;
                 case "John Deere":
-                    tractors = tractors.Where(t => t.brand.Equals("John Deere"));
+                    tractors = tractors.Where(t => t.brandID.Equals("John Deere"));
                     break;
                 case "Kubota":
-                    tractors = tractors.Where(t => t.brand.Equals("Kubota"));
+                    tractors = tractors.Where(t => t.brandID.Equals("Kubota"));
                     break;
                 case "Kioti":
-                    tractors = tractors.Where(t => t.brand.Equals("Kioti"));
+                    tractors = tractors.Where(t => t.brandID.Equals("Kioti"));
                     break;
                 case "Sub":
                     tractors = tractors.Where(t => t.Class.Equals("1. Sub-Compact"));
@@ -71,18 +69,9 @@ namespace TractorCompare.Controllers
                     tractors = tractors.Where(t => t.Class.Equals("3. Compact"));
                     break;
                 default:
-                    tractors = tractors.OrderBy(t => t.brand);
+                    tractors = tractors.OrderBy(t => t.brandID);
                     break;
             }
-
-
-
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                tractors = tractors.Where(t => t.Model.Contains(searchString));
-            }
-
             return View(tractors);
         }
 
@@ -137,19 +126,5 @@ namespace TractorCompare.Controllers
             return RedirectToAction("Index");
         }
 
-
-        public IActionResult JohnDeere()
-        {
-            var jd = repo.GetJD();
-
-            return View(jd);
-        }
-
-        public IActionResult Kubota()
-        {
-            var kubota = repo.GetKubota();
-
-            return View(kubota);
-        }
     }
 }

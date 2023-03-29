@@ -7,12 +7,6 @@
 {
     <input asp-for="tractorID" type="hidden" value="" />
 
-    <label asp-for="Model" class="control-label">Model</label>
-    <input type="text" name="Model" class="form-control" value="" />
-
-    <label asp-for="HP" class="control-label">Horse Power</label>
-    <input type="number" step="0.01" name="HP" class="form-control" />
-
     <div class="form-group">
         <label for="">Select a Brand</label>
         <select class="form-control" name="brandID" value="">
@@ -23,5 +17,38 @@
         </select>
     </div>
 
+    <label asp-for="Model" class="control-label">Model</label>
+    <input type="text" name="Model" class="form-control" value="" />
+
+    <div class="form-group">
+        <label for="">Select a size</label>
+        <select class="form-control" name="Class" value="">
+            <option value="1. Sub-Compact">Sub-Compact</option>
+            <option value="2. Small Frame">Small Frame</option>
+            <option value="2. Small Compact">Small Compact</option>
+            <option value="3. Compact">Compact</option>
+        </select>
+    </div>
+
+    <label asp-for="HP" class="control-label">Horse Power</label>
+    <input type="number" step="0.01" name="HP" class="form-control" />
+
+    <label asp-for="PTO" class="control-label">PTO Horsepower</label>
+    <input title="PTO" type="number" step="0.01" name="PTO" class="form-control" value="@Model.PTO" />
+
+    <label asp-for="fuel" class="control-label">Fuel capacity in gallons</label>
+    <input title="fuel" type="number" step="0.01" name="fuel" class="form-control" value="@Model.fuel" />
+
+    <label asp-for="hydroSteer" class="control-label">Hydraulic steering pump flow in gpm</label>
+    <input title="hydroSteer" type="number" step="0.01" name="hydroSteer" class="form-control" value="@Model.hydroSteer" />
+
+    <label asp-for="hydroImp" class="control-label">Hydraulic pump flow in gpm</label>
+    <input title="hydroImp" type="number" step="0.01" name="hydroImp" class="form-control" value="@Model.hydroImp" />
+
+    <label asp-for="threePT" class="control-label">three point hitch lift capacity in pounds</label>
+    <input title="threePT" type="number" step="0.01" name="threePT" class="form-control" value="@Model.threePT" />
+
+
+    <br />
     <input type="submit" value="Add Tractor" class="btn btn-primary" />
 }

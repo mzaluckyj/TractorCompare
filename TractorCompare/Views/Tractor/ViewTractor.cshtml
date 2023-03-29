@@ -11,56 +11,44 @@
 
 <h3>@Model.Model Information</h3>
 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6">
+            <img src="@Url.Content(@Model.image)" alt="Tractor image not found" width="500" />
+        </div>
+        <div class="col-6">
+            <h3>@Model.brandID @Model.Model</h3>
+            <br />
+            <p>Series/Size: @Model.Class</p>
+            <p>Engine Horsepower: @Model.HP</p>
+            <p>PTO Horsepower: @Model.PTO</p>
+            <p>Fuel tank capacity: @Model.fuel gallons</p>
+            <p>Hydraulic steering pump: @Model.hydroSteer gpm</p>
+            <p>Hydraulic implement pump: @Model.hydroImp gpm</p>
+            <p>Three piont hitch lift capacity: @Model.threePT Lbs</p>
 
-<table class="table">
-    <tr>
-        <th>image</th>
-        <th>Brand</th>
-        <th>Model</th>
-        <th>Engine HP</th>
-        <th>PTO HP</th>
-        <th>Fuel Tank</th>
-        <th>Hydrualic Steering</th>
-        <th>Hydrualic Implement</th>
-        <th>Three Point hitch lift Capacity</th>
-        <!--<th>LoaderID</th>-->
-    </tr>
-    <tr>
-
-        <td><img src="@Url.Content(@Model.image)" alt="tractor" width="150" /></td>
-        <td>@Model.brand</td>
-        <td>@Model.Model</td>
-        <td>@Model.HP HP</td>
-        <td>@Model.PTO HP</td>
-        <td>@Model.fuel gallons</td>
-        <td>@Model.hydroSteer gpm</td>
-        <td>@Model.hydroImp gpm</td>
-        <td>@Model.threePT Lbs</td>
-        <!--<td>@Model.loaderID</td>-->
-    </tr>
-</table>
-
-<br/>
-<div style="display:block">
-   <a href="/Tractor/UpdateTractor/@Model.tractorID">Update this Tractor</a>
+        </div>
+    </div>
 </div>
 
-<br/>
-<br/>
-<div class="container p-5 my-5" bg-dark text-white>
-    <img src="@Url.Content(@Model.image)" alt="tractor" />
-    <h1>@Model.brand</h1>
-    <h3>@Model.Model</h3>
-    <p>HorsePower: @Model.HP</p>
 
+<br />
+<br />
+<br />
+<br />
+<br />
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-2">
+            <a type="button" class="btn btn-outline-info" href="/Tractor/UpdateTractor/@Model.tractorID" >Update Tractor</a>
+        </div>
+        <div class="col-2">
+            @using (Html.BeginForm("DeleteTractor", "Tractor", "Post"))
+            {
+                <button class="btn btn-outline-danger" type="submit" onclick="return confirm('Are you sure?')">Delete tractor</button>
+                <input type="hidden" asp-for="tractorID" value="@Model.tractorID" />
+
+            }
+        </div>
+    </div>
 </div>
-
-<div style="display: block">
-
-    @using (Html.BeginForm("DeleteTractor", "Tractor", "Post"))
-    {
-        <input type="hidden" asp-for="tractorID" value="@Model.tractorID" />
-        <input type="submit" onclick="return confirm('Are you sure?')" value="Delete this product" />
-    }
-</div>
-

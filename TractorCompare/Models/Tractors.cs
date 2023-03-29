@@ -13,7 +13,7 @@ namespace TractorCompare.Models
         }
 
         public int tractorID { get; set; }
-        public int brandID { get; set; }
+        public string brandID { get; set; }
         public string brand { get; set; }
         public string Model { get; set; }
         public string Class { get; set; }

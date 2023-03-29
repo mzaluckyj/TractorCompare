@@ -29,17 +29,8 @@ namespace TractorCompare
 
         public void UpdateTractor(Tractors tractor) 
         {
-            _conn.Execute("Update Tractors SET Brand = @brand, Model = @Model, Class = @Class, HP = @HP Where tractorID = @id;",
-                new {Brand = tractor.brand, Model = tractor.Model, Class = tractor.Class, HP = tractor.HP, id = tractor.tractorID});
-        }
-        public IEnumerable<Tractors> GetJD()
-        {
-            return _conn.Query<Tractors>("Select * From Tractors Where brandID = '1';") ;
-        }
-
-        public IEnumerable<Tractors> GetKubota()
-        {
-            return _conn.Query<Tractors>("Select * From Tractors Where brandID = '2';");
+            _conn.Execute("Update Tractors SET Class = @Class, PTO =@PTO, fuel = @fuel, hydroSteer = @hydroSteer, hydroImp = @hydroImp, threePT = @threePT, HP = @HP Where tractorID = @id;",
+                new {Class = tractor.Class, PTO = tractor.PTO, fuel = tractor.fuel, hydroSteer = tractor.hydroSteer, hydroImp = tractor.hydroImp, threePT = tractor.threePT, HP = tractor.HP, id = tractor.tractorID});
         }
 
         public IEnumerable<Tractors> CompareNow() 
@@ -49,8 +40,8 @@ namespace TractorCompare
 
         public void InsertTractor(Tractors newtractor)
         {
-            _conn.Execute("INSERT INTO Tractors (Model, HP, brandID) VALUES (@model, @hp, @brandID);",
-                new { Model = newtractor.Model, HP = newtractor.HP, brandID = newtractor.brandID });
+            _conn.Execute("INSERT INTO Tractors (Model, HP, brandID, CLass, PTO, fuel, hydroSteer, hydroImp, threePT) VALUES (@model, @hp, @brandID, @Class, @PTO, @fuel, @hydroSteer, @hydroImp, @threePT);",
+                new { Model = newtractor.Model, HP = newtractor.HP, brandID = newtractor.brandID, Class = newtractor.Class, PTO = newtractor.PTO, fuel = newtractor.fuel, hydroSteer = newtractor.hydroSteer, hydroImp = newtractor.hydroImp, threePT = newtractor.threePT, });
         }
 
         public IEnumerable<Brand> GetBrands()

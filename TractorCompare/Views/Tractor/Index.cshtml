@@ -13,10 +13,10 @@
 <div class="container-fluid">
     <div class="row">
 
-        <div class="col-2">
+        <div class="col-1">
             <h2>Sort by</h2>
             <div>
-                <button class="btn-success" asp-action="Index">Show All</button>
+                <button class="btn btn-outline-primary" onclick="location.href='/Tractor/Index/'" type="button">Show All</button>
             </div>
             <br />
             <div class="dropdown">
@@ -35,46 +35,41 @@
                     Size
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li>@Html.ActionLink("Sub-Compact", "Index", new { filter = ViewBag.Sub})</li>
+                    <li>@Html.ActionLink("Sub-Compact", "Index", new { filter = ViewBag.Sub })</li>
                     <li>@Html.ActionLink("Small Frame", "Index", new { filter = ViewBag.SF })</li>
                     <li>@Html.ActionLink("Small Compact", "Index", new { filter = ViewBag.SC })</li>
                     <li>@Html.ActionLink("Compact", "Index", new { filter = ViewBag.Com })</li>
                 </ul>
             </div>
+            <br />
+            <div>
+                <button class="btn btn-outline-info" onclick="location.href='/Tractor/InsertTractor/'" type="button">Add a new Tractor</button>
+            </div>
+
         </div>
 
 
         
 
 
-        <div class="col-10">
+        <div class="col-11">
             <h2>Tractors</h2>
-            <form asp-action="Index" method="get">
-                <div class="form-actions no-color">
-                    <p>
-                        Find by Brand: <input type="text" name="SearchString" value="@ViewData["%CurrentFilter%"]" />
-                        <input type="submit" value="Search" class="btn btn-default" /> |
-                        <a asp-action="Index">Back to Full List</a>
-                    </p>
-                </div>
-            </form>
-            <div style="display: block">
-                <a href="/Tractor/InsertTractor/">Add a new Tractor</a>
-            </div>
 
-            <table class="table table-hover" data-bs-spy="scroll" id="TractorTable">
-                <thead>
+
+
+            <table class="table table-hover" id="TractorTable">
+                <thead class="bg-light sticky-top top-0">
                     <tr>
                         <th>Image</th>
                         <!--<th>Html.ActionLink("Brand", "Index", new {class="bi bi-arrow-down-up", sortOrder = ViewBag.BrandSort})</th>-->
                         <th>Brand </th>
                         <th>Model</th>
                         <th>Series/Size</th>
-                        <th>Horse Power</th>
+                        <th>Horsepower</th>
                         <th>PTO HP</th>
                         <th>Fuel cap.</th>
-                        <th>Hydrualic steering</th>
-                        <th>Hydrualic implement</th>
+                        <th>Hydraulic steering</th>
+                        <th>Hydraulic implement</th>
                         <th>3pt hitch lift cap.</th>
                     </tr>
 
@@ -86,14 +81,14 @@
                         <tr>
                             <td>
                                 <a href=/Tractor/viewTractor/@Tractor.tractorID>
-                                    <img src="@Url.Content(@Tractor.image)" alt="tractor" width="150" />
+                                    <img src="@Url.Content(@Tractor.image)" alt="Tractor image not found" width="150" />
                                 </a>
                             </td>
-                            <td>@Tractor.brand</td>
+                            <td>@Tractor.brandID</td>
                             <td>@Tractor.Model</td>
                             <td>@Tractor.Class</td>
-                            <td>@Tractor.HP HP</td>
-                            <td>@Tractor.PTO HP</td>
+                            <td>@Tractor.HP Hp</td>
+                            <td>@Tractor.PTO Hp</td>
                             <td>@Tractor.fuel Gal</td>
                             <td>@Tractor.hydroSteer Gpm</td>
                             <td>@Tractor.hydroImp Gpm</td>
