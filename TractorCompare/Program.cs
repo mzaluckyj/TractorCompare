@@ -6,16 +6,19 @@ using Microsoft.Extensions.Hosting;
 using MySql.Data.MySqlClient;
 using System.Data;
 using TractorCompare;
+using Azure.Identity;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+
 builder.Services.AddScoped<IDbConnection>((s) =>
 {
-    IDbConnection conn = new MySqlConnection(builder.Configuration.GetConnectionString("tractorselector"));
+    IDbConnection conn = new MySqlConnection(builder.Configuration.GetConnectionString("defaultConnection"));
     conn.Open();
     return conn;
 });

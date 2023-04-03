@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "mssql1": {
+      "secretStore": "LocalSecretsFile",
+      "resourceId": "/subscriptions/5d06d96c-1ad4-47e5-ae94-86b268e72d1c/resourceGroups/TractorCompare20230329202543ResourceGroup/providers/Microsoft.DBforMySQL/flexibleServers/tracselct",
+      "type": "Microsoft.DBforMySQL/flexibleServers",
+      "connectionId": "ConnectionStrings:tractorselector"
+    }
+  }
+}
